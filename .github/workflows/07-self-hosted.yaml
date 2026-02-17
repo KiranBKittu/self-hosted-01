@@ -1,13 +1,12 @@
 name: Deploy to EC2
 on: 
   push:
-    jobs:
-      deploy:
-        runs-on: self-hosted
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v4
-
-          - name: Deploy to nginx
-            run: |
-              sudo cp index.html /var/www/html/index.html
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Deploy to nginx
+        run: |
+          sudo cp index.html /var/www/html/index.html
