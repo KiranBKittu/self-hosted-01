@@ -1,7 +1,10 @@
 name: self hosted runner
 on: [push]
 jobs:
-  test:
+  deploy:
     runs-on: self-hosted
     steps:
-      - run: echo "Running inside AWS server!" >> output.txt
+      - name: Update app
+        run: |
+          cd ~/app/self-hosted-01
+          git pull origin main
