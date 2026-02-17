@@ -17,7 +17,6 @@ jobs:
         run: |
           sudo cp .github/workflows/index.html /usr/share/nginx/html/dev/
           sudo systemctl restart nginx
-
   deploy-prod:
     name: Deploy to Prod
     needs: deploy-dev
