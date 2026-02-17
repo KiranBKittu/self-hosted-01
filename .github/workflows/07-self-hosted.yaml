@@ -10,4 +10,4 @@ jobs:
       - name: Deploy to nginx
         run: |
           ls -la
-          sudo cp ./index.html /var/www/html/index.html
+          sudo cp .github/workflows/index.html /var/www/html/index.html
