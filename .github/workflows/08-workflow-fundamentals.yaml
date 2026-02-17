@@ -8,12 +8,11 @@ jobs:
     name: Deploy to Dev
     runs-on: [self-hosted, dev-runner]
     environment: DEV
-
+    
     steps:
-      steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        
+
       - name: Deploy to Dev NGINX
         run: |
           sudo cp index.html /usr/share/nginx/html/dev/
