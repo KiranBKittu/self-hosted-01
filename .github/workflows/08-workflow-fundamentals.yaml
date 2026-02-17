@@ -15,9 +15,7 @@ jobs:
 
       - name: Deploy to Dev NGINX
         run: |
-          pwd
-          ls -la
-          sudo cp index.html /usr/share/nginx/html/dev/
+          sudo cp .github/workflows/index.html /usr/share/nginx/html/dev/
           sudo systemctl restart nginx
 
   deploy-prod:
@@ -31,5 +29,5 @@ jobs:
 
       - name: Deploy to Prod NGINX
         run: |
-          sudo cp index.html /usr/share/nginx/html/prod/
+          sudo cp .github/workflows/index.html /usr/share/nginx/html/prod/
           sudo systemctl restart nginx
