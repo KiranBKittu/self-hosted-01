@@ -10,7 +10,10 @@ jobs:
     environment: DEV
 
     steps:
-      - uses: actions/checkout@v4
+      steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: Deploy to Dev NGINX
         run: |
           sudo cp index.html /usr/share/nginx/html/dev/
