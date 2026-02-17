@@ -24,7 +24,9 @@ jobs:
     environment: PROD
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        
       - name: Deploy to Prod NGINX
         run: |
           sudo cp .github/workflows/index.html /usr/share/nginx/html/prod/
