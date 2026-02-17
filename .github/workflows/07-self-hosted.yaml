@@ -1,0 +1,7 @@
+name: self hosted runner
+on: [push]
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - run: echo "Running inside AWS server!" >> output.txt
