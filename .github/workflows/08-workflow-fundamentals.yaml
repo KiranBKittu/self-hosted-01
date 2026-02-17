@@ -1,3 +1,4 @@
+# Workflow fundamentals Dev → Approval → Prod
 name: Dev to Prod Deployment
 on:
   push:
@@ -29,3 +30,11 @@ jobs:
         run: |
           sudo cp .github/workflows/index.html /usr/share/nginx/html/prod/
           sudo systemctl restart nginx
+# What interviewers expect after this level
+
+# They want to hear:
+# “I built an automated deployment pipeline using a self-hosted runner that pushes code to a live server.”
+
+# That’s already strong.
+# Next level answer:  “I implemented multi-stage CI/CD with approvals and artifact handling.”
+
