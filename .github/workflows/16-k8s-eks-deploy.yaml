@@ -1,17 +1,14 @@
 name: Deploy to EKS REPO
-on: 
-  push:
-    branches:
-      - main
+on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checkout Repo C
+      # Checkout Repo self-hosted-01
       - name: Checkout pipeline repo
         uses: actions/checkout@v3
 
-      # Checkout Repo B (k8s manifests )
+      # Checkout Repo Kubernetes (k8s manifests )
       - name: Checkout k8s repo
         uses: actions/checkout@v3
         with:
@@ -36,4 +33,4 @@ jobs:
       # Deploy to Kubernetes
       - name: Apply manifests
         run: |
-          kubectl apply -f k8s/20-deployment.yml
+          kubectl delete -f k8s/20-deployment.yml
