@@ -8,6 +8,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: list files
-        run: |
-          ls -la
-          pwd
+        run: ls -la
+      # installs latest terraform in the runner
+      - name: terrafrom setup
+        uses: hashicorp/setup-terraform@v3 # it installs latest terraform
+
+      - name: terraform init
+        run: terraform init
+
+      - name: terraform versions
+        run: terraform version
