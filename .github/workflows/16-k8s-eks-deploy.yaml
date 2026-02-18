@@ -1,4 +1,4 @@
-name: Deploy to EKS
+name: Deploy to EKS REPO
 on: workflow_dispatch
 jobs:
   deploy:
@@ -12,8 +12,8 @@ jobs:
       - name: Checkout k8s repo
         uses: actions/checkout@v3
         with:
-          repository: ORG_NAME/Repo-B
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: KiranBKittu/Kubernetes
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           path: k8s
 
       # Configure AWS
