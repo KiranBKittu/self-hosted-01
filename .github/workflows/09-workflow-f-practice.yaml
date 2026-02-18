@@ -9,22 +9,17 @@ jobs:
     runs-on: [self-hosted, dev-runner]
     environment: DEV
     steps:
-      - name: Checkout from main
-        uses: actions/checkout@v3
-
-      - name: Deploy DEV nginx
-        run: |
+      - uses: actions/checkout@v3
+      - run: |
           sudo cp .github/workflows/index.html /usr/share/nginx/html/
           sudo systemctl restart nginx
   deploy-prod:
     name: deploy to Prod
+    needs: deploy-dev
     runs-on: [self-hosted, prod-runner]
     environment: PROD
     steps:
-      - name: Checkout from main
-        uses: actions/checkout@v3
-
-      - name: Deploy to PROD nginx
-        run: |
+      - uses: actions/checkout@v3
+      - run: |
           sudo cp .github/workflows/index.html /usr/share/nginx/html/
           sudo systemctl restart nginx      
