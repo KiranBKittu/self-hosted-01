@@ -16,7 +16,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: KiranBKittu/Kubernetes
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          uses: :contentReference[oaicite:0]{index=0}@v3
+          token: ${{ secrets.GITHUB_TOKEN }}
+          run: ls -la k8s
           path: k8s
 
       # Configure AWS
