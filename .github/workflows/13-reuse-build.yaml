@@ -1,0 +1,20 @@
+name: Artifact Demo
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello from build" > output.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-file
+          path: output.txt
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: my-file
+      - run: cat output.txt
