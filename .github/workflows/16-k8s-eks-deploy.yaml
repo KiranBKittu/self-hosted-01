@@ -20,7 +20,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }} # no need to mention any where
           path: k8s
 
-      # Configure AWS details 1
+      # Configure AWS details
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
