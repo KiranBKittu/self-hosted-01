@@ -1,0 +1,14 @@
+name: Run jobs across multiple versions.
+on:
+  push:
+    branches:
+      - main
+jobs:
+  matrix-demo:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18]
+
+    steps:
+      - run: echo "Testing Node ${{ matrix.node }}"
