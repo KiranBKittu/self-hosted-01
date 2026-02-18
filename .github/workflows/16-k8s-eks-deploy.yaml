@@ -17,11 +17,10 @@ jobs:
         with:
           repository: KiranBKittu/Kubernetes
           uses: :contentReference[oaicite:0]{index=0}@v3
-          token: ${{ secrets.GITHUB_TOKEN }}
-          run: ls -la k8s
+          token: ${{ secrets.GITHUB_TOKEN }} # no need to mention any where
           path: k8s
 
-      # Configure AWS
+      # Configure AWS details
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
