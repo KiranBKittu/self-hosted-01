@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
+          echo "Running on $(hostname)"
           sudo cp .github/workflows/index.html /usr/share/nginx/html/
           sudo systemctl restart nginx
   deploy-prod:
