@@ -1,7 +1,6 @@
+#Build → Test → Deploy
 name: Pipeline Flow
-
 on: push
-
 jobs:
   build:
     runs-on: ubuntu-latest
