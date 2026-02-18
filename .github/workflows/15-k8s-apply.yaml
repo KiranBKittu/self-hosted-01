@@ -18,4 +18,4 @@ jobs:
         run: aws eks update-kubeconfig --name Test12345
 
       - name: Deploy to cluster
-        run: kubectl apply -f deployment.yml
+        run: kubectl apply -f k8s/deployment.yml
