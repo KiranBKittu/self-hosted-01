@@ -36,4 +36,4 @@ jobs:
       # Deploy to Kubernetes
       - name: Apply manifests
         run: |
-          kubectl delete -f k8s/
+          kubectl apply -f k8s/20-deployment.yaml
