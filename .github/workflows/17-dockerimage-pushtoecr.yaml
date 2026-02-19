@@ -19,7 +19,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-app:${{ github.sha }} .
+          docker build -t my-app:${{ github.sha }} ./app
 
       - name: Tag image for ECR
         run: |
