@@ -8,4 +8,4 @@ jobs:
         uses: actions/checkout@v4
       - name: Deploy to nginx
         run: |
-          sudo cp .github/workflows/index.html /var/www/html/index.html
+          sudo cp index.html /var/www/html/index.html
