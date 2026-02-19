@@ -5,6 +5,6 @@ on:
       - main
 jobs:
   call-resuable:
-    uses: ./.github/workflows/reusable_workflows/reusable.yaml
+    uses: ./.github\workflows\reusable_workflows\reusable.yaml
     with:
       env: production
