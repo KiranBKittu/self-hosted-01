@@ -1,21 +1,29 @@
-name: Deploy to EKS
-on: push
+name: Deploy it
+on:
+  push:
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: checkout actions repo
+        run: actions/checkout@v3
+      
+      - name: checkout k8s repo
+        run: actions/checkout@v3
+        with:
+          repository: KiranBKittu/Kubernetes
+          path: k8s
+      - name: aws configure
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Update kubeconfig
+          aws-region: ${{ secret.AWS_REGION }}
+      - name: connect to cluster
         run: aws eks update-kubeconfig --name Test12345
+      - name: deploy to eks
+        run: kubectl apply k8s/20-deployment.yml
 
-      - name: Deploy to cluster
-        run: kubectl apply -f k8s/deployment.yml
+
