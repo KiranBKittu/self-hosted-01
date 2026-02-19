@@ -11,7 +11,7 @@ jobs:
         run: actions/checkout@v3
       
       - name: checkout k8s repo
-        run: actions/checkout@v3
+        uses: actions/checkout@v3
         with:
           repository: KiranBKittu/Kubernetes
           path: k8s
