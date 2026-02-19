@@ -24,8 +24,7 @@ jobs:
         run: docker build -t my-app:$SHORT_SHA ./app
 
       - name: Tag image for ECR
-        run: |
-          docker tag my-app:$SHORT_SHA 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
+        run: docker tag my-app:$SHORT_SHA 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
 
       - name: Push image to ECR
         run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
