@@ -1,0 +1,10 @@
+name: Main Pipeline
+on:
+  push:
+    branches:
+      - main
+jobs:
+  call-resuable:
+    uses: ./.github/workflows/reusable_workflows/reusable.yaml
+    with:
+      env: production
