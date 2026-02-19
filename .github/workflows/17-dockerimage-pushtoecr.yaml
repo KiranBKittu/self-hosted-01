@@ -17,12 +17,15 @@ jobs:
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Set Commit id as small 7 letters
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Build Docker image
-        run: docker build -t my-app:${{ github.sha }} ./app
+        run: docker build -t my-app:$SHORT_SHA ./app
 
       - name: Tag image for ECR
         run: |
-          docker tag my-app:${{ github.sha }} 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:${GITHUB.SHA::7}
+          docker tag my-app:$SHORT_SHA 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
 
       - name: Push image to ECR
-        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:${GITHUB.SHA::7}
+        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
