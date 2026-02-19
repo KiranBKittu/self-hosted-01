@@ -7,8 +7,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout actions repo
-        run: actions/checkout@v3
+       # Checkout Repo self-hosted-01
+      - name: Checkout pipeline repo
+        uses: actions/checkout@v3
       
       - name: checkout k8s repo
         uses: actions/checkout@v3
