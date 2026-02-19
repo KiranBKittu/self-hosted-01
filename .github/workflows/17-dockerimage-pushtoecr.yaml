@@ -18,11 +18,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
-        run: docker build -t my-app:${{ github.sha }} ./app
+        run: docker build -t my-app:${GITHUB.SHA::7} ./app
 
       - name: Tag image for ECR
         run: |
-          docker tag my-app:${ GITHUB.SHA::7 } 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:${{ github.sha }}
+          docker tag my-app:${GITHUB.SHA::7} 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:${GITHUB.SHA::7}
 
       - name: Push image to ECR
-        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:${{ github.sha }}
+        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:${GITHUB.SHA::7}
