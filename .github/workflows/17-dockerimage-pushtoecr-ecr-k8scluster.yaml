@@ -1,0 +1,57 @@
+# github actions run docker image and push it to ECR of AWS then take that ECR image(Elastic Container Registry)
+#Build Docker → Push to ECR → Deploy to Kubernetes
+name: Build and Push Docker Image
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'deployment.yaml'
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: app # ECR Repository name
+  CLUSTER_NAME: Test12345 #Cluster name
+  DEPLOYMENT_NAME: deployment-app # this app and metadata labels of deployment should match 
+  CONTAINER_NAME: app-1 #This must match the container name inside the deployment:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set Commit id as small i.e 7 letters
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: docker build -t my-app:$SHORT_SHA ./app
+
+      - name: Tag image for ECR
+        run: docker tag my-app:$SHORT_SHA 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
+
+      # Pushing to AWS ECR
+      - name: Push image to ECR
+        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
+        
+      # Connect to EKS cluster
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_REGION
+        
+      - name: Update deployment image to remove extra tags
+        run: |
+          sed -i "s|image:.*|image: 683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA|" deployment.yaml
+
+      - name: Apply deployment
+        run: kubectl apply -f deployment.yaml
+
+        # to update already existing deployments
+        #run: kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
