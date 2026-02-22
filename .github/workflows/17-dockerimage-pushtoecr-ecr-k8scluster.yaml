@@ -3,10 +3,7 @@
 name: Build and Push Docker Image
 on:
   push:
-    branches: [main]
-    paths:
-      #- 'deployment.yaml'
-      - '.github/workflows/17-dockerimage-pushtoecr-ecr-k8scluster.yaml'
+    branches: main
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: app # ECR Repository name

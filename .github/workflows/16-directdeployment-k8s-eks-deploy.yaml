@@ -1,8 +1,10 @@
 name: Deploy to EKS REPO
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - 'k8s/20-deployment.yml'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
