@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+  name: deployment-app
 spec:
   replicas: 3
   selector:
@@ -13,7 +13,7 @@ spec:
         app: app
     spec:
       containers:
-        - name: app
+        - name: app-1
           image: 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:latest
           ports:
             - containerPort: 80
