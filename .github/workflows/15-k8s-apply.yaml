@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'k8s/20-deployment.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
