@@ -1,7 +1,7 @@
 name: Deploy to EKS REPO
 on:
   push:
-    branches: [main]
+    branches:
     paths:
       - 'k8s/20-deployment.yml'
 
