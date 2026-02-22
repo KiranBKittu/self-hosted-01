@@ -1,7 +1,11 @@
 # github actions run docker image and push it to ECR of AWS then take that ECR image(Elastic Container Registry)
 #Build Docker → Push to ECR → Deploy to Kubernetes
 name: Build and Push Docker Image
-on: push
+on: 
+  push:
+    branches: [main]
+      paths:
+        - 'deployment.yaml'
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: app # ECR Repository name
