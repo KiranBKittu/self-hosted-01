@@ -1,5 +1,4 @@
-# before running this we have to run deployment of k8s which is having below deployment & conainer name matched
-#after that if we run this no need to run deployment again Kubernetes rolling update
+# github actions run docker image and push it to ECR of AWS then take that ECR image(E)
 name: Build and Push Docker Image
 on: push
 env:
@@ -42,9 +41,12 @@ jobs:
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_REGION
         
-      # Deploy new image
-      - name: Deploy to EKS        
-        run: kubectl apply -f deployment.yaml
+      - name: Update deployment image to remove extra tags
+        run: |
+          sed -i "s|image:.*|image: 683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA|" deployment.yaml
+
+      - name: Apply deployment
+        run: kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
 
         # to update already existing deployment
         #run: kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
