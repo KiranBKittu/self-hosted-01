@@ -1,3 +1,4 @@
+# This file is using by .github/workflows/17-dockerimage-pushto file
 apiVersion: apps/v1
 kind: Deployment
 metadata:
