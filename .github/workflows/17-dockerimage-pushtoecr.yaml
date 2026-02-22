@@ -43,6 +43,8 @@ jobs:
         run: aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_REGION
         
       # Deploy new image
-      - name: Deploy to EKS
+      - name: Deploy to EKS        
+        run: kubectl apply -f deployment.yaml
+
+        # to update already existing deployment
         #run: kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
-        run: kubectl apply -f k8s/deployment.yaml
