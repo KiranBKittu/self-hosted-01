@@ -53,5 +53,5 @@ jobs:
       - name: Apply deployment
         run: kubectl apply -f deployment.yaml
 
-        # to update already existing deployment
+        # to update already existing deployments
         #run: kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=683134746681.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$SHORT_SHA
