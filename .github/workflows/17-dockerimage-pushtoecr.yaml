@@ -33,11 +33,11 @@ jobs:
 
       - name: Tag image for ECR
         run: docker tag my-app:$SHORT_SHA 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
-        
+
       # Pushing to AWS ECR
       - name: Push image to ECR
-        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA# Update kubeconfig
-
+        run: docker push 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:$SHORT_SHA
+        
       # Connect to EKS cluster
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_REGION
