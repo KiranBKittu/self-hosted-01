@@ -1,22 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: deployment
-  labels:
-    DEPLOYMENT_NAME: app
-spec: 
-  replicas: 3 # deployment defination starts from here
+metadata:
+  name: app
+spec:
+  replicas: 3
   selector:
     matchLabels:
-      DEPLOYMENT_NAME: app
-  template: # pod defination start from here
+      app: app
+  template:
     metadata:
       labels:
-       DEPLOYMENT_NAME: app
+        app: app
     spec:
       containers:
         - name: app
-          # image: nginx:1.25.2 # old nginx image for testing
-          image: nginx
-
-  
+          image: 683134746681.dkr.ecr.us-east-1.amazonaws.com/app:latest
+          ports:
+            - containerPort: 80
