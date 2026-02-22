@@ -1,4 +1,4 @@
-# This file is using by .github/workflows/17-dockerimage-pushto file
+# This file is using by .github/workflows/17-dockerimage-pushtoecr-ecr-k8scluster file
 apiVersion: apps/v1
 kind: Deployment
 metadata:
